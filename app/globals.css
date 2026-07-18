@@ -1,51 +1,43 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f4fc;
-  --foreground: #221d38;
-  --muted: #605a7d;
-  --surface: rgba(255, 255, 255, 0.5);
-  --border: rgba(34, 29, 56, 0.1);
-  --accent: #7c3aed;
-  --accent-foreground: #ffffff;
-  --glass: rgba(255, 255, 255, 0.55);
-  --glass-border: rgba(255, 255, 255, 0.7);
-  --g1: #7c3aed;
-  --g2: #ec4899;
-  --g3: #f59e0b;
-  --g4: #06b6d4;
-  --blob-opacity: 0.32;
+  --background: #1c372a;
+  --foreground: #f3ecd9;
+  --muted: #a8b8a0;
+  --border: rgba(243, 236, 217, 0.16);
+  --accent: #c2a25a;
+  --accent-foreground: #16281f;
+  --paper: #f6efdc;
+  --paper-ink: #2c2a1f;
+  --paper-muted: #6f6a58;
+  --paper-border: #e2d8bd;
+  --shadow-warm: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
-  --color-surface: var(--surface);
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-paper: var(--paper);
+  --color-paper-ink: var(--paper-ink);
+  --color-paper-muted: var(--paper-muted);
+  --color-paper-border: var(--paper-border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-serif: var(--font-fraunces);
+  --font-serif: var(--font-fraunces), Georgia, "Noto Serif TC", "PMingLiU", serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0e0b1f;
-    --foreground: #edeaff;
-    --muted: #a49dc8;
-    --surface: rgba(255, 255, 255, 0.05);
-    --border: rgba(255, 255, 255, 0.1);
-    --accent: #a78bfa;
-    --accent-foreground: #17102e;
-    --glass: rgba(26, 20, 52, 0.5);
-    --glass-border: rgba(255, 255, 255, 0.14);
-    --g1: #8b5cf6;
-    --g2: #f472b6;
-    --g3: #fbbf24;
-    --g4: #22d3ee;
-    --blob-opacity: 0.42;
+    --background: #14281f;
+    --foreground: #ece5d2;
+    --muted: #9aab92;
+    --border: rgba(236, 229, 210, 0.14);
+    --accent: #c9ab66;
+    --paper: #f1e9d3;
   }
 }
 
@@ -54,109 +46,85 @@ body {
   color: var(--foreground);
 }
 
-/* 錨點捲動時預留 fixed 導覽列的高度 */
+/* 錨點捲動時預留 sticky 導覽列高度 */
 section[id] {
-  scroll-margin-top: 6.5rem;
+  scroll-margin-top: 5.5rem;
 }
 
-/* ---- 玻璃面板 ---- */
-.glass {
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(18px) saturate(1.5);
+/* ---- 五線譜細線 ---- */
+.staff-lines {
+  height: 33px; /* 5 條線、4 個 7px 間距 */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    currentColor 0,
+    currentColor 1px,
+    transparent 1px,
+    transparent 8px
+  );
 }
 
-/* ---- 漸層文字 ---- */
-.text-gradient {
-  background: linear-gradient(100deg, var(--g1), var(--g2) 55%, var(--g3));
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-/* ---- 漸層按鈕 ---- */
-.btn-gradient {
-  background: linear-gradient(120deg, var(--g1), var(--g2));
-  box-shadow: 0 8px 24px color-mix(in oklab, var(--g2) 35%, transparent);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-.btn-gradient:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 36px color-mix(in oklab, var(--g2) 50%, transparent);
-}
-
-/* ---- 動態背景光暈 ---- */
-.blob {
+/* ---- 沙龍檯燈光池 ---- */
+.light-pool {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(90px);
-  opacity: var(--blob-opacity);
+  filter: blur(100px);
+  background: var(--accent);
   will-change: transform;
 }
-.blob-1 {
-  top: -12rem;
-  left: -8rem;
-  width: 34rem;
-  height: 34rem;
-  background: var(--g1);
-  animation: drift-1 26s ease-in-out infinite alternate;
-}
-.blob-2 {
-  top: 4rem;
-  right: -10rem;
+.light-pool-1 {
+  top: -10rem;
+  right: -6rem;
   width: 30rem;
   height: 30rem;
-  background: var(--g2);
-  animation: drift-2 32s ease-in-out infinite alternate;
+  opacity: 0.1;
+  animation: pool-drift-1 34s ease-in-out infinite alternate;
 }
-.blob-3 {
-  bottom: -14rem;
-  left: 20vw;
-  width: 32rem;
-  height: 32rem;
-  background: var(--g4);
-  animation: drift-3 38s ease-in-out infinite alternate;
+.light-pool-2 {
+  bottom: 8rem;
+  left: -10rem;
+  width: 26rem;
+  height: 26rem;
+  opacity: 0.07;
+  animation: pool-drift-2 42s ease-in-out infinite alternate;
 }
-.blob-4 {
-  bottom: 20vh;
-  right: 22vw;
-  width: 22rem;
-  height: 22rem;
-  background: var(--g3);
-  animation: drift-4 29s ease-in-out infinite alternate;
-}
-
-@keyframes drift-1 {
+@keyframes pool-drift-1 {
   to {
-    transform: translate(14vw, 10vh) scale(1.2);
+    transform: translate(-8vw, 12vh);
   }
 }
-@keyframes drift-2 {
+@keyframes pool-drift-2 {
   to {
-    transform: translate(-12vw, 14vh) scale(1.15);
-  }
-}
-@keyframes drift-3 {
-  to {
-    transform: translate(10vw, -10vh) scale(1.25);
-  }
-}
-@keyframes drift-4 {
-  to {
-    transform: translate(-8vw, -12vh) scale(0.85);
+    transform: translate(10vw, -8vh);
   }
 }
 
-/* ---- 開場動畫（hero 逐項浮現）---- */
+/* ---- 飄浮音符 ---- */
+.note-float {
+  position: absolute;
+  font-family: var(--font-serif);
+  color: var(--foreground);
+  opacity: 0.07;
+  animation: note-drift var(--dur, 20s) ease-in-out infinite alternate;
+  animation-delay: var(--delay, 0s);
+  will-change: transform;
+}
+@keyframes note-drift {
+  from {
+    transform: translateY(0) rotate(-8deg);
+  }
+  to {
+    transform: translateY(-42px) rotate(10deg);
+  }
+}
+
+/* ---- 開場動畫(hero 逐項浮現)---- */
 .intro-item {
   animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(26px);
   }
   to {
     opacity: 1;
@@ -167,7 +135,7 @@ section[id] {
 /* ---- 捲動進場 ---- */
 .reveal {
   opacity: 0;
-  transform: translateY(26px);
+  transform: translateY(24px);
   transition:
     opacity 0.7s ease,
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
@@ -177,49 +145,129 @@ section[id] {
   transform: none;
 }
 
-/* ---- 滑鼠 3D 傾斜 + 游標光暈 ---- */
-.tilt {
-  position: relative;
-  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-  transition: transform 0.15s ease;
+/* ---- 手稿紙卡 ---- */
+.sheet {
+  background: var(--paper);
+  color: var(--paper-ink);
+  border: 1px solid var(--paper-border);
+  transform: rotate(var(--rot, 0deg));
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
 }
-.tilt::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    260px circle at var(--mx, 50%) var(--my, 50%),
-    color-mix(in oklab, var(--g1) 22%, transparent),
-    transparent 70%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-.tilt:hover::before {
-  opacity: 1;
+.sheet:hover {
+  transform: rotate(0deg) translateY(-6px);
+  box-shadow: var(--shadow-warm);
 }
 
-/* ---- 減少動態偏好：全部關閉 ---- */
+/* ---- 按鈕 ---- */
+.btn-brass {
+  background: var(--accent);
+  color: var(--accent-foreground);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+.btn-brass:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.05);
+}
+.btn-outline-cream {
+  border: 1px solid var(--border);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+.btn-outline-cream:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+a:active,
+button:active,
+.btn-brass:active,
+.btn-outline-cream:active {
+  transform: scale(0.97);
+}
+
+/* ---- 游標跟隨光暈 ---- */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 340px;
+  height: 340px;
+  margin: -170px 0 0 -170px;
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 5;
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--accent) 45%, transparent) 0%,
+    transparent 65%
+  );
+  opacity: 0.14;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+@media (pointer: coarse) {
+  .cursor-glow {
+    display: none;
+  }
+}
+
+/* ---- 點擊音符迸發 ---- */
+.click-note {
+  position: fixed;
+  pointer-events: none;
+  z-index: 60;
+  font-family: var(--font-serif);
+  color: var(--accent);
+  animation: note-pop 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes note-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.6) rotate(-10deg);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -56px) scale(1.15) rotate(12deg);
+  }
+}
+
+/* ---- 減少動態偏好:全部關閉 ---- */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
   .intro-item,
-  .blob {
+  .light-pool,
+  .note-float,
+  .click-note {
     animation: none !important;
+  }
+  .click-note {
+    display: none;
+  }
+  .cursor-glow {
+    display: none;
   }
   .reveal {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
   }
-  .tilt {
-    transform: none !important;
-  }
-  .btn-gradient,
-  .btn-gradient:hover {
-    transform: none;
+  .sheet,
+  .sheet:hover,
+  .btn-brass:hover,
+  .btn-outline-cream:hover {
+    transform: rotate(var(--rot, 0deg));
   }
 }

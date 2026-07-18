@@ -2,21 +2,34 @@ import { content } from "@/data/content";
 
 export default function Hero() {
   return (
-    <section id="top" className="relative">
-      <div className="mx-auto max-w-5xl px-6 pt-40 pb-24 sm:pt-48 sm:pb-32">
+    <section id="top" className="relative overflow-hidden">
+      {/* 五線譜裝飾:一段譜線與停在上面的音符 */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-14 text-foreground/12"
+      >
+        <div className="staff-lines" />
+        <span className="absolute -top-5 left-[18%] font-serif text-3xl text-accent/50">
+          ♪
+        </span>
+        <span className="absolute -top-7 left-[63%] font-serif text-4xl text-foreground/25">
+          ♫
+        </span>
+      </div>
+
+      <div className="relative mx-auto max-w-5xl px-6 pt-24 pb-36 sm:pt-32 sm:pb-44">
         <p
-          className="intro-item glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-muted"
+          className="intro-item font-serif text-lg italic text-accent"
           style={{ animationDelay: "80ms" }}
         >
-          <span className="inline-block size-2 rounded-full bg-[var(--g2)]" />
-          {content.role}
+          ♪ {content.role}
         </p>
 
         <h1
-          className="intro-item mt-6 max-w-2xl text-5xl font-bold tracking-tight text-balance sm:text-7xl"
+          className="intro-item mt-6 max-w-2xl font-serif text-5xl font-semibold tracking-tight text-balance sm:text-7xl"
           style={{ animationDelay: "200ms" }}
         >
-          <span className="text-gradient">{content.name}</span>
+          {content.name}
         </h1>
 
         <p
@@ -32,13 +45,13 @@ export default function Hero() {
         >
           <a
             href="#projects"
-            className="btn-gradient rounded-full px-7 py-3 text-sm font-medium text-white"
+            className="btn-brass rounded-full px-7 py-3 text-sm font-medium"
           >
             看作品
           </a>
           <a
             href="#contact"
-            className="glass rounded-full px-7 py-3 text-sm font-medium transition-colors hover:text-accent"
+            className="btn-outline-cream rounded-full px-7 py-3 text-sm font-medium"
           >
             聯絡我
           </a>
