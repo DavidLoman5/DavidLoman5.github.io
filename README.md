@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 個人網站
 
-## Getting Started
+用 Next.js（App Router + TypeScript + Tailwind CSS）建置的個人主頁，靜態匯出後部署到 GitHub Pages。
 
-First, run the development server:
+## 本機開發
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+打開 [http://localhost:3000](http://localhost:3000) 就能看到網站。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 編輯內容
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+網站所有文字（姓名、簡介、技能、作品、聯絡方式）都集中在 [`data/content.ts`](data/content.ts) 這一個檔案裡，改這裡就好，不需要動元件程式碼。目前放的是 placeholder，記得換成自己的真實資料。
 
-## Learn More
+版面元件在 `components/` 底下（`Hero`、`About`、`Projects`、`Contact`、`Navbar`、`Footer`），頁面組裝在 [`app/page.tsx`](app/page.tsx)。
 
-To learn more about Next.js, take a look at the following resources:
+## 部署到 GitHub Pages
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+專案已經設定好 `output: 'export'` 靜態匯出（[`next.config.ts`](next.config.ts)）和自動部署流程（[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)）。第一次部署前，到這個 repo 的設定裡做一次性設定：
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. 把這個資料夾 push 到 GitHub 上名為 `DavidLoman5.github.io` 的 repo（`main` 分支）。
+2. 到 repo 的 **Settings → Pages**，「Source」選擇 **GitHub Actions**。
+3. 之後每次 push 到 `main`，GitHub Actions 就會自動執行 `npm run build` 並部署到 `https://DavidLoman5.github.io`。
 
-## Deploy on Vercel
+也可以在本機手動確認匯出結果：
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+匯出的靜態檔案會在 `out/` 資料夾。
