@@ -14,17 +14,17 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur">
-      <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+    <header className="fixed inset-x-0 top-4 z-50 px-4 sm:top-6">
+      <nav className="glass mx-auto flex max-w-4xl items-center justify-between rounded-full px-5 py-3 sm:px-6">
         <a
           href="#top"
-          className="font-serif text-lg italic tracking-tight text-foreground"
+          className="text-gradient font-serif text-lg font-semibold italic tracking-tight"
           onClick={() => setOpen(false)}
         >
           {content.initials}
         </a>
 
-        <ul className="hidden items-center gap-8 text-sm text-muted sm:flex">
+        <ul className="hidden items-center gap-7 text-sm text-muted sm:flex">
           {links.map((link) => (
             <li key={link.href}>
               <a href={link.href} className="transition-colors hover:text-foreground">
@@ -35,7 +35,7 @@ export default function Navbar() {
         </ul>
         <a
           href="#contact"
-          className="hidden rounded-full border border-foreground/15 px-4 py-2 text-sm transition-colors hover:border-accent hover:text-accent sm:inline-block"
+          className="btn-gradient hidden rounded-full px-4 py-2 text-xs font-medium text-white sm:inline-block"
         >
           聯絡我
         </a>
@@ -51,7 +51,7 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <ul className="flex flex-col gap-1 border-t border-border/70 px-6 py-4 text-sm sm:hidden">
+        <ul className="glass mx-auto mt-2 flex max-w-4xl flex-col gap-1 rounded-3xl px-6 py-4 text-sm sm:hidden">
           {links.map((link) => (
             <li key={link.href}>
               <a

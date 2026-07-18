@@ -2,41 +2,54 @@ import { content } from "@/data/content";
 
 export default function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden">
-      <p
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-10 -right-6 select-none font-serif text-[13rem] italic leading-none text-foreground/5 sm:text-[20rem]"
-      >
-        {content.initials}
-      </p>
-
-      <div className="relative mx-auto max-w-5xl px-6 pt-20 pb-24 sm:pt-28 sm:pb-32">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
+    <section id="top" className="relative">
+      <div className="mx-auto max-w-5xl px-6 pt-40 pb-24 sm:pt-48 sm:pb-32">
+        <p
+          className="intro-item glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-muted"
+          style={{ animationDelay: "80ms" }}
+        >
+          <span className="inline-block size-2 rounded-full bg-[var(--g2)]" />
           {content.role}
         </p>
-        <h1 className="mt-5 max-w-2xl text-4xl font-semibold tracking-tight text-balance sm:text-6xl">
-          {content.name}
+
+        <h1
+          className="intro-item mt-6 max-w-2xl text-5xl font-bold tracking-tight text-balance sm:text-7xl"
+          style={{ animationDelay: "200ms" }}
+        >
+          <span className="text-gradient">{content.name}</span>
         </h1>
-        <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
+
+        <p
+          className="intro-item mt-6 max-w-xl text-lg leading-relaxed text-muted"
+          style={{ animationDelay: "340ms" }}
+        >
           {content.tagline}
         </p>
 
-        <div className="mt-10 flex flex-wrap items-center gap-4">
+        <div
+          className="intro-item mt-10 flex flex-wrap items-center gap-4"
+          style={{ animationDelay: "480ms" }}
+        >
           <a
             href="#projects"
-            className="rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-transform hover:-translate-y-0.5"
+            className="btn-gradient rounded-full px-7 py-3 text-sm font-medium text-white"
           >
             看作品
           </a>
           <a
             href="#contact"
-            className="rounded-full border border-foreground/15 px-6 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+            className="glass rounded-full px-7 py-3 text-sm font-medium transition-colors hover:text-accent"
           >
             聯絡我
           </a>
         </div>
 
-        <p className="mt-14 text-sm text-muted">{content.location}</p>
+        <p
+          className="intro-item mt-14 text-sm text-muted"
+          style={{ animationDelay: "620ms" }}
+        >
+          {content.location}
+        </p>
       </div>
     </section>
   );

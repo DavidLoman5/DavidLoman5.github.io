@@ -1,13 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #faf8f4;
-  --foreground: #211d1a;
-  --muted: #6b645c;
-  --surface: #f2efe8;
-  --border: #e4ddd0;
-  --accent: #c1502e;
-  --accent-foreground: #fffaf5;
+  --background: #f5f4fc;
+  --foreground: #221d38;
+  --muted: #605a7d;
+  --surface: rgba(255, 255, 255, 0.5);
+  --border: rgba(34, 29, 56, 0.1);
+  --accent: #7c3aed;
+  --accent-foreground: #ffffff;
+  --glass: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.7);
+  --g1: #7c3aed;
+  --g2: #ec4899;
+  --g3: #f59e0b;
+  --g4: #06b6d4;
+  --blob-opacity: 0.32;
 }
 
 @theme inline {
@@ -25,17 +32,194 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #17140f;
-    --foreground: #f2ede4;
-    --muted: #a89e8f;
-    --surface: #1e1a14;
-    --border: #322c22;
-    --accent: #e2793f;
-    --accent-foreground: #17140f;
+    --background: #0e0b1f;
+    --foreground: #edeaff;
+    --muted: #a49dc8;
+    --surface: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.1);
+    --accent: #a78bfa;
+    --accent-foreground: #17102e;
+    --glass: rgba(26, 20, 52, 0.5);
+    --glass-border: rgba(255, 255, 255, 0.14);
+    --g1: #8b5cf6;
+    --g2: #f472b6;
+    --g3: #fbbf24;
+    --g4: #22d3ee;
+    --blob-opacity: 0.42;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* 錨點捲動時預留 fixed 導覽列的高度 */
+section[id] {
+  scroll-margin-top: 6.5rem;
+}
+
+/* ---- 玻璃面板 ---- */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px) saturate(1.5);
+}
+
+/* ---- 漸層文字 ---- */
+.text-gradient {
+  background: linear-gradient(100deg, var(--g1), var(--g2) 55%, var(--g3));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* ---- 漸層按鈕 ---- */
+.btn-gradient {
+  background: linear-gradient(120deg, var(--g1), var(--g2));
+  box-shadow: 0 8px 24px color-mix(in oklab, var(--g2) 35%, transparent);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px color-mix(in oklab, var(--g2) 50%, transparent);
+}
+
+/* ---- 動態背景光暈 ---- */
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: var(--blob-opacity);
+  will-change: transform;
+}
+.blob-1 {
+  top: -12rem;
+  left: -8rem;
+  width: 34rem;
+  height: 34rem;
+  background: var(--g1);
+  animation: drift-1 26s ease-in-out infinite alternate;
+}
+.blob-2 {
+  top: 4rem;
+  right: -10rem;
+  width: 30rem;
+  height: 30rem;
+  background: var(--g2);
+  animation: drift-2 32s ease-in-out infinite alternate;
+}
+.blob-3 {
+  bottom: -14rem;
+  left: 20vw;
+  width: 32rem;
+  height: 32rem;
+  background: var(--g4);
+  animation: drift-3 38s ease-in-out infinite alternate;
+}
+.blob-4 {
+  bottom: 20vh;
+  right: 22vw;
+  width: 22rem;
+  height: 22rem;
+  background: var(--g3);
+  animation: drift-4 29s ease-in-out infinite alternate;
+}
+
+@keyframes drift-1 {
+  to {
+    transform: translate(14vw, 10vh) scale(1.2);
+  }
+}
+@keyframes drift-2 {
+  to {
+    transform: translate(-12vw, 14vh) scale(1.15);
+  }
+}
+@keyframes drift-3 {
+  to {
+    transform: translate(10vw, -10vh) scale(1.25);
+  }
+}
+@keyframes drift-4 {
+  to {
+    transform: translate(-8vw, -12vh) scale(0.85);
+  }
+}
+
+/* ---- 開場動畫（hero 逐項浮現）---- */
+.intro-item {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- 捲動進場 ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- 滑鼠 3D 傾斜 + 游標光暈 ---- */
+.tilt {
+  position: relative;
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.15s ease;
+}
+.tilt::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in oklab, var(--g1) 22%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.tilt:hover::before {
+  opacity: 1;
+}
+
+/* ---- 減少動態偏好：全部關閉 ---- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .intro-item,
+  .blob {
+    animation: none !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .tilt {
+    transform: none !important;
+  }
+  .btn-gradient,
+  .btn-gradient:hover {
+    transform: none;
+  }
 }
