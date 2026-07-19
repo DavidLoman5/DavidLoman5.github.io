@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import { content } from "@/data/content";
 import AnimatedBackground from "@/components/AnimatedBackground";
@@ -25,6 +25,16 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   title: `${content.name} · ${content.role}`,
   description: content.tagline,
+  openGraph: {
+    title: `${content.name} · ${content.role}`,
+    description: content.tagline,
+    type: "website",
+    locale: "zh_TW",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#1c372a",
 };
 
 export default function RootLayout({

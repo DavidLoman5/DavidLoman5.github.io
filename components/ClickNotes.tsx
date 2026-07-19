@@ -11,6 +11,7 @@ export default function ClickNotes() {
     function onClick(e: MouseEvent) {
       const target = e.target as Element | null;
       if (!target?.closest("a, button")) return;
+      if (document.querySelectorAll(".click-note").length >= 12) return;
 
       const note = document.createElement("span");
       note.className = "click-note";

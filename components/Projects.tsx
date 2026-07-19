@@ -41,6 +41,8 @@ export default function Projects() {
                     {project.links.demo && (
                       <a
                         href={project.links.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 text-paper-ink underline-offset-4 hover:underline"
                       >
                         Demo
@@ -50,6 +52,8 @@ export default function Projects() {
                     {project.links.code && (
                       <a
                         href={project.links.code}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 text-paper-muted hover:text-paper-ink"
                       >
                         程式碼

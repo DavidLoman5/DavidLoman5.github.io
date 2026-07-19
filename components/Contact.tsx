@@ -18,7 +18,7 @@ export default function Contact() {
 
           <a
             href={`mailto:${content.email}`}
-            className="mt-8 inline-flex items-center gap-3 font-serif text-2xl font-semibold italic tracking-tight transition-colors hover:text-accent sm:text-3xl"
+            className="mt-8 inline-flex items-center gap-3 font-serif text-2xl font-semibold italic tracking-tight break-all transition-colors hover:text-accent sm:text-3xl"
           >
             <MailIcon className="size-6 shrink-0 text-accent" />
             {content.email}
@@ -28,6 +28,8 @@ export default function Contact() {
             <a
               href={content.social.github}
               aria-label="GitHub"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full border border-border p-3 text-muted transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent"
             >
               <GithubIcon className="size-5" />
@@ -35,6 +37,8 @@ export default function Contact() {
             <a
               href={content.social.linkedin}
               aria-label="LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full border border-border p-3 text-muted transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent"
             >
               <LinkedinIcon className="size-5" />

@@ -16,21 +16,30 @@ export default function CursorGlow() {
     let x = targetX;
     let y = targetY;
     let raf = 0;
-
-    function onMove(e: MouseEvent) {
-      targetX = e.clientX;
-      targetY = e.clientY;
-    }
+    let running = false;
 
     function tick() {
       x += (targetX - x) * 0.08;
       y += (targetY - y) * 0.08;
       el!.style.transform = `translate(${x}px, ${y}px)`;
+      // 收斂後停下迴圈，游標靜止時不佔用每一幀
+      if (Math.abs(targetX - x) < 0.1 && Math.abs(targetY - y) < 0.1) {
+        running = false;
+        return;
+      }
       raf = requestAnimationFrame(tick);
     }
 
+    function onMove(e: MouseEvent) {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      if (!running) {
+        running = true;
+        raf = requestAnimationFrame(tick);
+      }
+    }
+
     window.addEventListener("mousemove", onMove);
-    raf = requestAnimationFrame(tick);
     return () => {
       window.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(raf);

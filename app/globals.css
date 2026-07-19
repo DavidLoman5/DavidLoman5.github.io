@@ -5,7 +5,7 @@
   --foreground: #f3ecd9;
   --muted: #a8b8a0;
   --border: rgba(243, 236, 217, 0.16);
-  --accent: #c2a25a;
+  --accent: #cbac66;
   --accent-foreground: #16281f;
   --paper: #f6efdc;
   --paper-ink: #2c2a1f;
@@ -36,7 +36,7 @@
     --foreground: #ece5d2;
     --muted: #9aab92;
     --border: rgba(236, 229, 210, 0.14);
-    --accent: #c9ab66;
+    --accent: #d3b573;
     --paper: #f1e9d3;
   }
 }
@@ -44,6 +44,20 @@
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 /* 錨點捲動時預留 sticky 導覽列高度 */

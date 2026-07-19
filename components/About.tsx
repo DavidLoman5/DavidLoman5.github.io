@@ -26,7 +26,7 @@ export default function About() {
                 {content.about.skills.map((skill) => (
                   <li
                     key={skill}
-                    className="rounded-full border border-border px-3 py-1 text-sm text-foreground/90 transition-colors hover:border-accent hover:text-accent"
+                    className="rounded-full border border-border px-3 py-1 text-sm text-foreground/90"
                   >
                     {skill}
                   </li>

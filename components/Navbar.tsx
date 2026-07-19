@@ -46,6 +46,8 @@ export default function Navbar() {
         <button
           type="button"
           aria-label={open ? "關閉選單" : "開啟選單"}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
           className="sm:hidden"
           onClick={() => setOpen((v) => !v)}
         >
@@ -54,7 +56,10 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <ul className="flex flex-col gap-1 border-t border-border px-6 py-4 text-sm sm:hidden">
+        <ul
+          id="mobile-menu"
+          className="flex flex-col gap-1 border-t border-border px-6 py-4 text-sm sm:hidden"
+        >
           {links.map((link) => (
             <li key={link.href}>
               <a
